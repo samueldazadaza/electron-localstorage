@@ -13,6 +13,10 @@ const parserResponse = text => {
     return parser.parseFromString(text, 'text/html'); //para convertir txt a html
 }
 
+const findTitle = (nodes) => {
+    return  nodes.querySelector('title').innerText;
+}
+
 //Events
 newLinkURL.addEventListener('keyup', () => {
     newLinkButton.disabled = !newLinkURL.validity.valid; //para validar si input es una url simple
@@ -24,5 +28,6 @@ newLinkForm.addEventListener('submit', async (e) => {
     const response = await fetch(url); //api fetch navegar por web
     const text = await response.text(); //obtener html en txt
     const html = parserResponse(text);
-    console.log(html)
+    const title = findTitle(html)
+    console.log(title)
 });
