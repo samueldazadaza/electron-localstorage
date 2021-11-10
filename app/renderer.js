@@ -6,7 +6,6 @@ const newLinkURL = document.querySelector('.new-link-url');
 const newLinkButton = document.querySelector('.new-link-button');
 const clearStorageButton = document.querySelector('.clear-storage');
 
-
 //DOM APIs
 const parser = new DOMParser();
 const parserResponse = text => {
@@ -31,10 +30,10 @@ const getLinks = () => {
 //agregar html a link
 const createLinkElement = link => {
     return `
-        <div>
+        <div class="m-2 px-4 bg-red-200 rounded shadow-l">
             <h3>${link.title}</h3>
             <p>
-                <a href="${link.url}">${link.url}</a>
+                <a class="text-blue-600" href="${link.url}">${link.url}</a>
             </p>
         </div>
     `;
@@ -42,11 +41,13 @@ const createLinkElement = link => {
 
 //pintar links en pantalla
 const renderLinks = () => {
-    const linksElements = getLinks().map(createLinkElement).join();
+    const linksElements = getLinks().map(createLinkElement).join('');
     linksSection.innerHTML = linksElements;
 };
 
 //Events
+renderLinks(); //para renderizar cuando inicie app
+
 newLinkURL.addEventListener('keyup', () => {
     newLinkButton.disabled = !newLinkURL.validity.valid; //para validar si input es una url simple
 });

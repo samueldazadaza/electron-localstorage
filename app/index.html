@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electron APP</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>My Favorits Websites</h1>
+    <h1 class="bg-gray-800 text-gray-200 text-center font-size-xl">My Favorits Websites</h1>
 
     <div class="error-message"></div>
 
-    <section class="add-new-link">
+    <section class="add-new-link mx-3">
         <form class="new-link-form" action="">
             <input type="url" class="new-link-url" placeholder="URL" size="100" required autofocus>
-            <button type="submit" class="new-link-button" disabled>
+            <button type="submit" class="new-link-button bg-red-500 px-5 m-2 rounded" disabled>
                 Save
             </button>
         </form>
@@ -23,7 +24,7 @@
     <section class="links"></section>
 
     <section class="controls">
-        <button class="clear-storage">Clear Storage</button>
+        <button class="clear-storage bg-red-500 px-5 m-2 rounded">Clear Storage</button>
     </section>
 
     <script src="./renderer.js">
