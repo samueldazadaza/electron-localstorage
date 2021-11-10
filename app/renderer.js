@@ -1,5 +1,5 @@
 //DOM Elements
-const linkSection = document.querySelector('.links');
+const linksSection = document.querySelector('.links');
 const errorMessage = document.querySelector('.error-message');
 const newLinkForm = document.querySelector('.new-link-form');
 const newLinkURL = document.querySelector('.new-link-url');
@@ -20,7 +20,31 @@ const findTitle = (nodes) => {
 //para guardar datos en local storage
 const storeLink = (title, url) => {
     localStorage.setItem(url, JSON.stringify({title, url})) //para convertir a string y guardar item
-}
+};
+
+//recorrer array JSON desde local storage y obtener datos
+const getLinks = () => {
+    return Object.keys(localStorage)
+        .map(key => JSON.parse(localStorage.getItem(key)));
+};
+
+//agregar html a link
+const createLinkElement = link => {
+    return `
+        <div>
+            <h3>${link.title}</h3>
+            <p>
+                <a href="${link.url}">${link.url}</a>
+            </p>
+        </div>
+    `;
+};
+
+//pintar links en pantalla
+const renderLinks = () => {
+    const linksElements = getLinks().map(createLinkElement).join();
+    linksSection.innerHTML = linksElements;
+};
 
 //Events
 newLinkURL.addEventListener('keyup', () => {
@@ -35,6 +59,5 @@ newLinkForm.addEventListener('submit', async (e) => {
     const html = parserResponse(text);
     const title = findTitle(html); // bustar solo titulo dentro del html de la respuesta
     storeLink(title, url);
-
-    console.log(title)
+    renderLinks();
 });
