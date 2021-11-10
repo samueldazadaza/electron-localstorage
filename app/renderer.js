@@ -17,6 +17,11 @@ const findTitle = (nodes) => {
     return  nodes.querySelector('title').innerText;
 }
 
+//para guardar datos en local storage
+const storeLink = (title, url) => {
+    localStorage.setItem(url, JSON.stringify({title, url})) //para convertir a string y guardar item
+}
+
 //Events
 newLinkURL.addEventListener('keyup', () => {
     newLinkButton.disabled = !newLinkURL.validity.valid; //para validar si input es una url simple
@@ -28,6 +33,8 @@ newLinkForm.addEventListener('submit', async (e) => {
     const response = await fetch(url); //api fetch navegar por web
     const text = await response.text(); //obtener html en txt
     const html = parserResponse(text);
-    const title = findTitle(html)
+    const title = findTitle(html); // bustar solo titulo dentro del html de la respuesta
+    storeLink(title, url);
+
     console.log(title)
 });
