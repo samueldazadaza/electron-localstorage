@@ -45,6 +45,10 @@ const renderLinks = () => {
     linksSection.innerHTML = linksElements;
 };
 
+const clearForm = () => {
+    newLinkURL.value = null; //para borar txt de input
+};
+
 //Events
 renderLinks(); //para renderizar cuando inicie app
 
@@ -60,5 +64,11 @@ newLinkForm.addEventListener('submit', async (e) => {
     const html = parserResponse(text);
     const title = findTitle(html); // bustar solo titulo dentro del html de la respuesta
     storeLink(title, url);
+    clearForm();
     renderLinks();
+});
+
+clearStorageButton.addEventListener('click', () => {
+    localStorage.clear();
+    linksSection.innerHTML = '';
 });
