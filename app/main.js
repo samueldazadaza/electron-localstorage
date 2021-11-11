@@ -5,7 +5,7 @@ let mainWindow = null //para que app siga funcionando
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
         webPreferences : {
-            nodeIntegration: true //obtener api de node en ventana
+            nodeIntegration: false //obtener api de node en ventana
             // nodeIntegrationInWorker: true,
             // contextIsolation: false,
             // enableRemoteModule: true

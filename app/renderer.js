@@ -8,7 +8,7 @@ const clearStorageButton = document.querySelector('.clear-storage');
 
 //DOM APIs
 const parser = new DOMParser();
-const { shell } = require('electron'); //api para interactuar con sistema operativo
+//const { shell } = require('electron'); //api para interactuar con sistema operativo
 
 const parserResponse = text => {
     return parser.parseFromString(text, 'text/html'); //para convertir txt a html
