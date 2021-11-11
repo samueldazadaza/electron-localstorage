@@ -8,6 +8,8 @@ const clearStorageButton = document.querySelector('.clear-storage');
 
 //DOM APIs
 const parser = new DOMParser();
+const { shell } = require('electron'); //api para interactuar con sistema operativo
+
 const parserResponse = text => {
     return parser.parseFromString(text, 'text/html'); //para convertir txt a html
 }
@@ -88,3 +90,12 @@ clearStorageButton.addEventListener('click', () => {
     localStorage.clear();
     linksSection.innerHTML = '';
 });
+
+//capturar evento cundo usuario da clicks en esta seccion
+linksSection.addEventListener('click', (e) => {
+    if (e.target.href) {
+        e.preventDefault();
+        //console.log(e.target.ref)
+        shell.openExternal(e.target.href);
+    }
+})

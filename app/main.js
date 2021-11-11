@@ -6,6 +6,9 @@ app.on('ready', () => {
     mainWindow = new BrowserWindow({
         webPreferences : {
             nodeIntegration: true //obtener api de node en ventana
+            // nodeIntegrationInWorker: true,
+            // contextIsolation: false,
+            // enableRemoteModule: true
         }
     });
     mainWindow.loadFile(__dirname + '/index.html')
