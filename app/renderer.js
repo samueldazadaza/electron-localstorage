@@ -45,9 +45,20 @@ const renderLinks = () => {
     linksSection.innerHTML = linksElements;
 };
 
+//limpiar formulario
 const clearForm = () => {
     newLinkURL.value = null; //para borar txt de input
 };
+
+//imprimir error peticion http
+const handleError = (error, url) => {
+    errorMessage.innerHTML = `
+        There was an issue adding "${url}" : ${error.message}
+    `.trim();
+    setTimeout( () => {
+        errorMessage.innerHTML = null;
+    }, 5000);
+}
 
 //Events
 renderLinks(); //para renderizar cuando inicie app
@@ -59,13 +70,18 @@ newLinkURL.addEventListener('keyup', () => {
 newLinkForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const url = newLinkURL.value;
-    const response = await fetch(url); //api fetch navegar por web
-    const text = await response.text(); //obtener html en txt
-    const html = parserResponse(text);
-    const title = findTitle(html); // bustar solo titulo dentro del html de la respuesta
-    storeLink(title, url);
-    clearForm();
-    renderLinks();
+    //para manejo de errores
+    try {
+        const response = await fetch(url); //api fetch navegar por web
+        const text = await response.text(); //obtener html en txt
+        const html = parserResponse(text);
+        const title = findTitle(html); // bustar solo titulo dentro del html de la respuesta
+        storeLink(title, url);
+        clearForm();
+        renderLinks();
+    } catch (e) {
+        handleError(e, url);
+    }
 });
 
 clearStorageButton.addEventListener('click', () => {
